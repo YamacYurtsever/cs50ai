@@ -55,7 +55,8 @@ def load_data(directory):
 def main():
     if len(sys.argv) > 2:
         sys.exit("Usage: python degrees.py [directory]")
-    directory = sys.argv[1] if len(sys.argv) == 2 else "large"
+    directory = sys.argv[1] if len(
+        sys.argv) == 2 else "large"
 
     # Load data from files into memory
     print("Loading data...")
@@ -94,7 +95,7 @@ def shortest_path(source, target):
 
     # Initialize frontier with the starting node
     start = Node(state=source, parent=None, action=None)
-    frontier = StackFrontier()
+    frontier = QueueFrontier()
     frontier.add(start)
 
     # Initialize an empty explored set
@@ -114,6 +115,7 @@ def shortest_path(source, target):
             while node.parent is not None:
                 pairs.append((node.action, node.state))
                 node = node.parent
+            pairs.reverse()
             return pairs
 
         # Mark node as explored
@@ -122,7 +124,7 @@ def shortest_path(source, target):
         # Add neighbors to the frontier
         neighbors = neighbors_for_person(node.state)
         for neighbor in neighbors:
-            if not frontier.contains_state(neighbor) and not neighbor in explored:
+            if not frontier.contains_state(neighbor[1]) and not neighbor in explored:
                 child = Node(state=neighbor[1],
                              parent=node, action=neighbor[0])
                 frontier.add(child)
