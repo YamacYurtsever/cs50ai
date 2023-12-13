@@ -31,7 +31,7 @@ def main():
     # Get a compiled neural network
     model = get_model()
 
-    # Fit model on training data
+    # Fit model on training data (Train neural network)
     model.fit(x_train, y_train, epochs=EPOCHS)
 
     # Evaluate neural network performance
@@ -99,7 +99,7 @@ def get_model():
         # Output layer
         tf.keras.layers.Dense(NUM_CATEGORIES, activation="softmax")
     ])
-    # Train neural network
+    # Compile neural network
     model.compile(
         optimizer="adam",
         loss="categorical_crossentropy",
