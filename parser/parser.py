@@ -77,14 +77,16 @@ def np_chunk(tree):
     """
     np_chunks = []
 
-    def is_valid_chunk(subtree):
-        if subtree.label() != "NP":
+    def is_noun(tree):
+        if len(list(tree.subtrees())) == 2 and list(tree.subtrees())[1].label() == "N":
+            return True
+        return False
+
+    def is_valid_chunk(tree):
+        if tree.label() != "NP" or is_noun(tree):
             return False
-        for sub in subtree.subtrees():
-            if sub.label() == "NP" and sub is not subtree:
-                if not (len(list(sub.subtrees())) == 2 and list(sub.subtrees())[1].label() == "N"):
-                    return False
-        if len(list(subtree.subtrees())) == 2 and list(subtree.subtrees())[1].label() == "N":
+        for subtree in tree.subtrees():
+            if subtree is not tree and subtree.label() == "NP" and not is_noun(subtree):
                 return False
         return True
 
