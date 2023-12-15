@@ -1,4 +1,6 @@
 {
 	"editor.scrollbar.horizontalScrollbarSize": 12,
-	"editor.scrollbar.ignoreHorizontalScrollbarInContentHeight": false
+	"editor.scrollbar.ignoreHorizontalScrollbarInContentHeight": false,
+	"editor.mouseWheelScrollSensitivity": 0.33,
+	"files.autoSave": "onFocusChange"
 }
